@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Desafio1.Models;
+using System.Net;
 
 namespace Desafio1.Controllers
 {
@@ -70,21 +71,40 @@ namespace Desafio1.Controllers
                 }
             }
 
-            return NoContent();
+            //return NoContent();
+            return CreatedAtAction(nameof(GetProdutos), new { id = produtos.Id }, produtos);
         }
 
         // POST: api/Produtos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Produtos>> PostProdutos(Produtos produtos)
-        {
-            _context.Produtos.Add(produtos);
-            await _context.SaveChangesAsync();
+        public async Task<ActionResult> PostProdutos([FromBody]Produtos produtos)
+        {         
+            //return CreatedAtAction(nameof(GetProdutos), new { id = produtos.Id }, produtos);//Alterar
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = _context.Produtos.Add(produtos);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProdutos", new { id = produtos.Id }, produtos);
+                if (result != null)
+                {
+                    return Content("Produto Cadastrado");
+                }
+                else
+                {
+                    return BadRequest("Ocorreu um erro desconhecido");
+                }
+            }
+            catch (FormatException)
+            {
+                return Content("Os valores informados não são válidos");
+            }
         }
-
         // DELETE: api/Produtos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Produtos>> DeleteProdutos(Guid id)
