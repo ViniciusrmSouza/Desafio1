@@ -16,5 +16,8 @@ namespace Desafio1.Models
 
         [Required(ErrorMessage = "Defina uma quantidade")]
         public int Quantidade { get; set; }
+
+        public DateTime DataUltimaVenda { get; set; }
+        public double ValUltimaVenda { get; set; }
     }
 }
