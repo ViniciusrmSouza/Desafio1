@@ -6,10 +6,10 @@ namespace Desafio1.Models
     public class TodoContext : DbContext
     {
         public DbSet<Produtos> Produtos { get; set; }
+        public DbSet<Compras> Compras { get; set; }
         public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
             
-        }
-        public DbSet<Desafio1.Models.Compras> Compras { get; set; }
+        }   
     }
 }

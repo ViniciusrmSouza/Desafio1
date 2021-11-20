@@ -8,17 +8,9 @@ namespace Desafio1.Models
     {
         [Key]
         public Guid Id { get; set; }
-
-        private readonly TodoContext _context;
+        public Guid IdProduto { get; set; }
         public int QntComprada { get; set; }
-        public Produtos Produto { get; set; }
-        //public Cartao Cartao { get; set; }
 
-        public async Task ComprarAsync(Guid id)
-        {
-            Produto = await _context.Produtos.FindAsync(id);
-            Produto.Quantidade -= QntComprada;
-        }
-
+       // public Cartao Cartao { get; set; }
     }
 }
