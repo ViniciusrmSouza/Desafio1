@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Desafio1.Models
 {
     public class Compras
     {
-        private readonly TodoContext _context;
-        public Produtos Produto { get; set; }
-        public Cartao Cartao { get; set; }
+        [Key]
+        public Guid Id { get; set; }
 
-        public async Task ComprarAsync(Guid id, int quantidade)
+        private readonly TodoContext _context;
+        public int QntComprada { get; set; }
+        public Produtos Produto { get; set; }
+        //public Cartao Cartao { get; set; }
+
+        public async Task ComprarAsync(Guid id)
         {
             Produto = await _context.Produtos.FindAsync(id);
-            Produto.Quantidade -= quantidade;
+            Produto.Quantidade -= QntComprada;
         }
 
     }

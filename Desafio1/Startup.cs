@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Desafio1.Models;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace Desafio1
 {
@@ -23,6 +25,22 @@ namespace Desafio1
             services.AddDbContext<TodoContext>(p =>
                p.UseInMemoryDatabase("TodoList"));
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Desafio",
+                    Description = "Desafio do estagio",
+                    TermsOfService = new Uri("http://dontpad.com/termsserv"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Vinicius Souza",
+                        Email = "viniciusrmsouza577@gmail.com",
+                        Url = new Uri("https://github.com/ViniciusrmSouza")
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +50,14 @@ namespace Desafio1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Desafio");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 

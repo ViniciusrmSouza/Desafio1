@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Desafio1.Models;
 
 namespace Desafio1.Models
 {
@@ -9,5 +10,6 @@ namespace Desafio1.Models
         {
             
         }
+        public DbSet<Desafio1.Models.Compras> Compras { get; set; }
     }
 }
