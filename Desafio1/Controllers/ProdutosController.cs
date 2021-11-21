@@ -21,14 +21,17 @@ namespace Desafio1.Controllers
             _context = context;
         }
 
-        // GET: api/Produtos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produtos>>> GetProdutos()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Ocorreu um erro desconhecido");
+            }
+
             return await _context.Produtos.ToListAsync();
         }
 
-        // GET: api/Produtos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Produtos>> GetProdutos(Guid id)
         {
@@ -37,14 +40,14 @@ namespace Desafio1.Controllers
             if (produtos == null)
             {
                 return NotFound();
+            }else if (!ModelState.IsValid)
+            {
+                return BadRequest("Ocorreu um erro desconhecido");
             }
 
             return produtos;
         }
 
-        // PUT: api/Produtos/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProdutos(Guid id, Produtos produtos)
         {
@@ -71,17 +74,12 @@ namespace Desafio1.Controllers
                 }
             }
 
-            //return NoContent();
             return CreatedAtAction(nameof(GetProdutos), new { id = produtos.Id }, produtos);
         }
 
-        // POST: api/Produtos
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult> PostProdutos([FromBody]Produtos produtos)
         {         
-            //return CreatedAtAction(nameof(GetProdutos), new { id = produtos.Id }, produtos);//Alterar
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -105,20 +103,20 @@ namespace Desafio1.Controllers
                 return Content("Os valores informados não são válidos");
             }
         }
-        // DELETE: api/Produtos/5
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult<Produtos>> DeleteProdutos(Guid id)
         {
             var produtos = await _context.Produtos.FindAsync(id);
             if (produtos == null)
             {
-                return NotFound();
+                return BadRequest("Ocorreu um erro desconhecido");
             }
 
             _context.Produtos.Remove(produtos);
             await _context.SaveChangesAsync();
 
-            return produtos;
+            return Content("Produto excluído com sucesso");
         }
 
         private bool ProdutosExists(Guid id)

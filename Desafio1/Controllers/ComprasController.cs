@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Desafio1.Controllers
@@ -22,7 +20,7 @@ namespace Desafio1.Controllers
         [HttpPost]
         public async Task<ActionResult> Comprar([FromBody] Compras compra)
         {
-            //return CreatedAtAction(nameof(GetProdutos), new { id = produtos.Id }, produtos);//Alterar
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -35,6 +33,11 @@ namespace Desafio1.Controllers
                 p.DataUltimaVenda = DateTime.Now;
                 p.ValUltimaVenda = p.ValorUnitario * compra.QntComprada;
                 await _context.SaveChangesAsync();
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Ocorreu um erro desconhecido");
+                }
 
                 if (result != null)
                 {
@@ -49,7 +52,6 @@ namespace Desafio1.Controllers
             {
                 return Content("Os valores informados não são válidos");
             }
-
         }
     }
 }
