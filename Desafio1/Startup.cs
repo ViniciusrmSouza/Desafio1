@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Desafio1.Models;
 using Microsoft.OpenApi.Models;
 using System;
+using Desafio1.Data;
 
 namespace Desafio1
 {

@@ -1,4 +1,5 @@
-﻿using Desafio1.Models;
+﻿using Desafio1.Data;
+using Desafio1.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

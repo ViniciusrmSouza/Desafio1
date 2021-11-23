@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Desafio1.Models;
 
-namespace Desafio1.Models
+namespace Desafio1.Data
 {
     public class TodoContext : DbContext
     {

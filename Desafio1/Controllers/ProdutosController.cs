@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Desafio1.Models;
 using System.Net;
+using Desafio1.Data;
 
 namespace Desafio1.Controllers
 {
@@ -39,12 +40,8 @@ namespace Desafio1.Controllers
 
             if (produtos == null)
             {
-                return NotFound();
-            }else if (!ModelState.IsValid)
-            {
                 return BadRequest("Ocorreu um erro desconhecido");
             }
-
             return produtos;
         }
 
