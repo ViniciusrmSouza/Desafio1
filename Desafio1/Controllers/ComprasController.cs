@@ -27,11 +27,11 @@ namespace Desafio1.Controllers
             }
             try
             {
-                var result = _context.Produtos.FindAsync(compra.IdProduto);
+                var result = _context.Produtos.FindAsync(compra.Produto_Id);
                 var p = result.Result;
-                p.Quantidade -= compra.QntComprada;
+                p.Qtde_Estoque -= compra.Qtde_Comprada;
                 p.DataUltimaVenda = DateTime.Now;
-                p.ValUltimaVenda = p.ValorUnitario * compra.QntComprada;
+                p.ValUltimaVenda = p.Valor_Unitario * compra.Qtde_Comprada;
                 await _context.SaveChangesAsync();
 
                 if (!ModelState.IsValid)

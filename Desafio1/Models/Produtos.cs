@@ -12,10 +12,10 @@ namespace Desafio1.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Defina um valor")]
-        public double ValorUnitario { get; set; }
+        public double Valor_Unitario { get; set; }
 
         [Required(ErrorMessage = "Defina uma quantidade")]
-        public int Quantidade { get; set; }
+        public int Qtde_Estoque { get; set; }
 
         public DateTime DataUltimaVenda { get; set; }
         public double ValUltimaVenda { get; set; }

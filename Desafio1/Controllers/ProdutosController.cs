@@ -48,41 +48,12 @@ namespace Desafio1.Controllers
             return produtos;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProdutos(Guid id, Produtos produtos)
-        {
-            if (id != produtos.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(produtos).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProdutosExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction(nameof(GetProdutos), new { id = produtos.Id }, produtos);
-        }
-
         [HttpPost]
         public async Task<ActionResult> PostProdutos([FromBody]Produtos produtos)
         {         
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Ocorreu um erro desconhecido");
             }
             try
             {
@@ -117,11 +88,6 @@ namespace Desafio1.Controllers
             await _context.SaveChangesAsync();
 
             return Content("Produto excluído com sucesso");
-        }
-
-        private bool ProdutosExists(Guid id)
-        {
-            return _context.Produtos.Any(e => e.Id == id);
         }
     }
 }

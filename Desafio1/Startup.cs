@@ -31,11 +31,11 @@ namespace Desafio1
                 {
                     Version = "v1",
                     Title = "Desafio",
-                    Description = "Desafio do estagio",
+                    Description = "Desafio do estágio",
                     TermsOfService = new Uri("http://dontpad.com/termsserv"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Vinicius Souza",
+                        Name = "Vinícius Souza",
                         Email = "viniciusrmsouza577@gmail.com",
                         Url = new Uri("https://github.com/ViniciusrmSouza")
                     }

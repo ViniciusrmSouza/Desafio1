@@ -6,9 +6,11 @@ namespace Desafio1.Models
 {
     public class Compras
     {
+        public Guid Produto_Id { get; set; }
+        public int Qtde_Comprada { get; set; }
         public Cartao Cartao { get; set; }
-        public Guid IdProduto { get; set; }
-        public int QntComprada { get; set; }
+       
+  
 
        
     }
